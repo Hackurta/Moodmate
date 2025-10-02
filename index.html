@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoodMate 💖</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      background: #fff0f6;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 20px;
+      color: #d63384;
+    }
+    .moods {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 20px;
+    }
+    button {
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      background: #ff85a1;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #d63384;
+    }
+    #result {
+      margin: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    iframe {
+      margin-top: 15px;
+      width: 100%;
+      max-width: 350px;
+      height: 200px;
+      border-radius: 12px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>MoodMate 💖</h1>
+  <p>Pick your mood & let me cheer you up 🎬</p>
+
+  <div class="moods">
+    <button onclick="showReference('happy')">😊 Happy</button>
+    <button onclick="showReference('sad')">😔 Sad</button>
+    <button onclick="showReference('anxious')">😟 Anxious</button>
+    <button onclick="showReference('lonely')">🥺 Lonely</button>
+    <button onclick="showReference('stressed')">😵‍💫 Stressed</button>
+    <button onclick="showReference('romantic')">❤️ Romantic</button>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    const references = {
+      happy: [
+        {
+          quote: "Joey: How you doin’? (Friends)",
+          video: "https://www.youtube.com/embed/93ETi5Hhqho"
+        },
+        {
+          quote: "Bunny in YJHD: ‘Kahin pahunchne ke liye kahin se nikalna padta hai.’",
+          video: "https://www.youtube.com/embed/u1YOGk-2T-8"
+        }
+      ],
+      sad: [
+        {
+          quote: "Geet: ‘Main apni favourite hoon.’ (Jab We Met)",
+          video: "https://www.youtube.com/embed/zYd4q-fS6Rw"
+        },
+        {
+          quote: "Monica: ‘Welcome to the real world. It sucks. You’re gonna love it.’ (Friends)",
+          video: ""
+        }
+      ],
+      anxious: [
+	 {
+      quote: "Ohana means family. Family means nobody gets left behind. (Lilo & Stitch)",
+      video: "https://www.youtube.com/embed/U37cChUfHk0"
+    },
+    {
+      quote: "Jitna bhi try karo Bunny, life mein kuch na kuch toh chhootega hi. Toh jahan hain wohi ka maza lete hain. (YJHD)",
+      video: ""
+    },
+    {
+      quote: "Welcome to the real world. It sucks. You’re gonna love it. (Friends)",
+      video: "https://www.youtube.com/embed/CLvXFVbb82Q"
+    }
+  // you can add more later...
+      ],
+      lonely: [
+        {
+          quote: "Pam & Jim: Even the hardest days are easier with someone by your side. (The Office)",
+          video: ""
+        }
+      ],
+      stressed: [
+        {
+          quote: "Michael Scott: ‘You miss 100% of the shots you don’t take.’ (The Office)",
+          video: "https://www.youtube.com/embed/hO2lH53e2YQ"
+        }
+      ],
+      romantic: [
+        {
+          quote: "Geet & Aditya on the train (Jab We Met)",
+          video: "https://www.youtube.com/embed/Jdz1dldfvlE"
+        }
+      ]
+    };
+
+    function showReference(mood) {
+      const moodRefs = references[mood];
+      const randomRef = moodRefs[Math.floor(Math.random() * moodRefs.length)];
+      
+      let content = `<h2>${randomRef.quote}</h2>`;
+      if (randomRef.video) {
+        content += `<iframe src="${randomRef.video}" allowfullscreen></iframe>`;
+      }
+      document.getElementById("result").innerHTML = content;
+    }
+  </script>
+
+  <footer style="margin: 20px; font-size: 14px; color: #888;">
+    Made with ❤️ by You
+  </footer>
+</body>
+</html>
