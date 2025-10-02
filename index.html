@@ -1,143 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MoodMate 💖</title>
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      text-align: center;
-      background: #fff0f6;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      margin-top: 20px;
-      color: #d63384;
-    }
-    .moods {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      padding: 20px;
-    }
-    button {
-      padding: 15px;
-      font-size: 18px;
-      border: none;
-      border-radius: 12px;
-      background: #ff85a1;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #d63384;
-    }
-    #result {
-      margin: 20px;
-      padding: 15px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    iframe {
-      margin-top: 15px;
-      width: 100%;
-      max-width: 350px;
-      height: 200px;
-      border-radius: 12px;
-      border: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoodMate 💖</title>
+<style>
+body {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  background: #fff0f6;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  margin-top: 20px;
+  color: #d63384;
+}
+.moods {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 20px;
+}
+button {
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  background: #ff85a1;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #d63384;
+}
+#help-btn {
+  display: block;
+  margin: 30px auto;
+  background: #ff3399;
+  width: 60%;
+}
+#result {
+  margin: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+iframe {
+  margin-top: 15px;
+  width: 100%;
+  max-width: 350px;
+  height: 200px;
+  border-radius: 12px;
+  border: none;
+}
+</style>
 </head>
 <body>
-  <h1>MoodMate 💖</h1>
-  <p>Pick your mood & let me cheer you up 🎬</p>
+<h1>MoodMate 💖</h1>
+<p>Pick your mood & let me cheer you up 🎬</p>
 
-  <div class="moods">
-    <button onclick="showReference('happy')">😊 Happy</button>
-    <button onclick="showReference('sad')">😔 Sad</button>
-    <button onclick="showReference('anxious')">😟 Anxious</button>
-    <button onclick="showReference('lonely')">🥺 Lonely</button>
-    <button onclick="showReference('stressed')">😵‍💫 Stressed</button>
-    <button onclick="showReference('romantic')">❤️ Romantic</button>
-  </div>
+<div class="moods">
+  <button onclick="showReference('happy')">😊 Happy</button>
+  <button onclick="showReference('sad')">😔 Sad</button>
+  <button onclick="showReference('anxious')">😟 Anxious</button>
+  <button onclick="showReference('lonely')">🥺 Lonely</button>
+  <button onclick="showReference('stressed')">😵‍💫 Stressed</button>
+  <button onclick="showReference('romantic')">❤️ Romantic</button>
+</div>
 
-  <div id="result"></div>
+<button id="help-btn" onclick="suggestMood()">✨ Help me with my mood</button>
 
-  <script>
-    const references = {
-      happy: [
-        {
-          quote: "Joey: How you doin’? (Friends)",
-          video: "https://www.youtube.com/embed/93ETi5Hhqho"
-        },
-        {
-          quote: "Bunny in YJHD: ‘Kahin pahunchne ke liye kahin se nikalna padta hai.’",
-          video: "https://www.youtube.com/embed/u1YOGk-2T-8"
-        }
-      ],
-      sad: [
-        {
-          quote: "Geet: ‘Main apni favourite hoon.’ (Jab We Met)",
-          video: "https://www.youtube.com/embed/zYd4q-fS6Rw"
-        },
-        {
-          quote: "Monica: ‘Welcome to the real world. It sucks. You’re gonna love it.’ (Friends)",
-          video: ""
-        }
-      ],
-      anxious: [
-	 {
-      quote: "Ohana means family. Family means nobody gets left behind. (Lilo & Stitch)",
-      video: "https://www.youtube.com/embed/U37cChUfHk0"
-    },
-    {
-      quote: "Jitna bhi try karo Bunny, life mein kuch na kuch toh chhootega hi. Toh jahan hain wohi ka maza lete hain. (YJHD)",
-      video: ""
-    },
-    {
-      quote: "Welcome to the real world. It sucks. You’re gonna love it. (Friends)",
-      video: "https://www.youtube.com/embed/CLvXFVbb82Q"
-    }
-  // you can add more later...
-      ],
-      lonely: [
-        {
-          quote: "Pam & Jim: Even the hardest days are easier with someone by your side. (The Office)",
-          video: ""
-        }
-      ],
-      stressed: [
-        {
-          quote: "Michael Scott: ‘You miss 100% of the shots you don’t take.’ (The Office)",
-          video: "https://www.youtube.com/embed/hO2lH53e2YQ"
-        }
-      ],
-      romantic: [
-        {
-          quote: "Geet & Aditya on the train (Jab We Met)",
-          video: "https://www.youtube.com/embed/Jdz1dldfvlE"
-        }
-      ]
-    };
+<div id="result"></div>
 
-    function showReference(mood) {
-      const moodRefs = references[mood];
-      const randomRef = moodRefs[Math.floor(Math.random() * moodRefs.length)];
-      
-      let content = `<h2>${randomRef.quote}</h2>`;
-      if (randomRef.video) {
-        content += `<iframe src="${randomRef.video}" allowfullscreen></iframe>`;
-      }
-      document.getElementById("result").innerHTML = content;
-    }
-  </script>
+<script>
+const references = {
+  happy: [
+    { quote: "Joey: How you doin’? (Friends)", video: "https://www.youtube.com/embed/CLvXFVbb82Q" },
+    { quote: "Michael: I am Beyoncé, always. (The Office)", video: "https://www.youtube.com/embed/gO8N3L_aERg" },
+    { quote: "Phil: When life gives you lemonade, make lemons. (Modern Family)", video: "https://www.youtube.com/embed/0rylq43HnUU" },
+    { quote: "Geet: Main apni favourite hoon. (Jab We Met)", video: "https://www.youtube.com/embed/iCQRauYNN-g" },
+    { quote: "Lilo: Ohana means family. Nobody gets left behind or forgotten. (Lilo & Stitch)", video: "https://www.youtube.com/embed/U37cChUfHk0" },
+    { quote: "Rory: Oy with the poodles already! (Gilmore Girls)", video: "https://www.youtube.com/embed/urkXoKCKNkk" },
+    { quote: "Jim: I love you. (The Office)", video: "https://www.youtube.com/embed/LxeINIgEp38" },
+    { quote: "Daphne: I do hope you dance. (Bridgerton)", video: "https://www.youtube.com/embed/XLGlB9YNDUo" },
+    { quote: "Tripling: Sibling power! Let’s go! (Tripling)", video: "https://www.youtube.com/WHXEuKQC9OI" },
+    { quote: "Little Things: You make ordinary moments extraordinary. (Little Things)", video: "" },
+    { quote: "Queen: I will not apologize for being ambitious. (Queen)", video: "" },
+    { quote: "Bunny: Kabhi kabhi lagta hai apun hi bhagwan hai. (YJHD)", video: "https://www.youtube.com/embed/KiN0dSwBTv4" },
+    { quote: "Friends: Pivot! (Friends)", video: "https://www.youtube.com/embed/PikkE_6FDbs" },
+    { quote: "Monica: I got this! (Friends)", video: "" },
+    { quote: "YJHD: Kahin pahunchne ke liye kahin se nikalna padta hai. (YJHD)", video: "https://www.youtube.com/embed/u1YOGk-2T-8" }
+  ],
+  sad: [
+    { quote: "Geet: Tum mujhe kabhi samajh nahi paoge. (Jab We Met)", video: "https://www.youtube.com/embed/OPCMyrZdGzE" },
+    { quote: "Bunny: Kabhi kabhi lagta hai apun hi bhagwan hai. (YJHD)", video: "https://www.youtube.com/embed/KiN0dSwBTv4" },
+    { quote: "Ross: We were on a break! (Friends)", video: "https://www.youtube.com/embed/CLvXFVbb82Q" },
+    { quote: "Michael: I... declare... bankruptcy! (The Office)", video: "https://www.youtube.com/embed/8sBC3YCTn_o" },
+    { quote: "Phil: I can’t manage all this! (Modern Family)", video: "https://www.youtube.com/embed/0rylq43HnUU" },
+    { quote: "Daphne: Sometimes the heart has reasons that reason does not know. (Bridgerton)", video: "https://www.youtube.com/embed/XLGlB9YNDUo" },
+    { quote: "Lilo: Everything is bad, nothing is good. (Lilo & Stitch)", video: "https://www.youtube.com/embed/U37cChUfHk0" },
+    { quote: "Tripling: No one to talk to. (Tripling)", video: "https://www.youtube.com/watch?v=WHXEuKQC9OI" },
+    { quote: "Pam: I feel alone tonight. (The Office)", video: "https://www.youtube.com/watch?v=gO8N3L_aERg" },
+    { quote: "Geet: Mujhe samajh nahi aa raha kya karun. (Jab We Met)", video: "https://www.youtube.com/embed/OPCMyrZdGzE" }
+  ],
+  anxious: [
+    { quote: "Michael: I am in danger. (The Office)", video: "https://www.youtube.com/watch?v=8sBC3YCTn_o" },
+    { quote: "Bunny: Agar kuch galat ho gaya toh? (YJHD)", video: "https://www.youtube.com/embed/KiN0dSwBTv4" },
+    { quote: "Geet: Mujhe samajh nahi aa raha kya karun. (Jab We Met)", video: "https://www.youtube.com/embed/OPCMyrZdGzE" },
+    { quote: "Ross: Oh my God, oh my God, oh my God! (Friends)", video: "https://www.youtube.com/embed/CLvXFVbb82Q" },
+    { quote: "Phil: I don't know if I can do this! (Modern Family)", video: "https://www.youtube.com/embed/0rylq43HnUU" },
+    { quote: "Tripling: What if we fail? (Tripling)", video: "https://www.youtube.com/watch?v=WHXEuKQC9OI" },
+    { quote: "Lilo: Nani, help me! (Lilo & Stitch)", video: "https://www.youtube.com/embed/U37cChUfHk0" },
+    { quote: "Rory: I can't handle this. (Gilmore Girls)", video: "https://www.youtube.com/embed/urkXoKCKNkk" },
+    { quote: "Daphne: What if everything goes wrong? (Bridgerton)", video: "https://www.youtube.com/embed/XLGlB9YNDUo" },
+    { quote: "Geet: Mera plan fail ho gaya! (Jab We Met)", video: "https://www.youtube.com/embed/OPCMyrZdGzE" }
+  ],
+  lonely: [
+    { quote: "Pam: I feel alone tonight. (The Office)", video: "https://www.youtube.com/watch?v=gO8N3L_aERg" },
+    { quote: "Ross: I miss everyone. (Friends)", video: "https://www.youtube.com/embed/CLvXFVbb82Q" },
+    { quote: "Geet: Koi nahi hai mere saath. (Jab We Met)", video: "https://www.youtube.com/embed/OPCMyrZdGzE" },
+    { quote: "Daphne: I wish someone was here. (Bridgerton)", video: "https://www.youtube.com/embed/XLGlB9YNDUo" },
+    { quote: "Rory: Why am I alone? (Gilmore Girls)", video: "https://www.youtube.com/embed/urkXoKCKNkk" }
+  ],
+  stressed: [
+    { quote: "Michael: I am under so much pressure. (The Office)", video: "https://www.youtube.com/watch?v=8sBC3YCTn_o" },
+    { quote: "Ross: Why is everything so complicated? (Friends)", video: "https://www.youtube.com/embed/CLvXFVbb82Q" },
+    { quote: "Claire: I can’t manage all this! (Modern Family)", video: "https://www.youtube.com/embed/0rylq43HnUU" },
+    { quote: "Tripling: We have too much to handle! (Tripling)", video: "https://www.youtube.com/watch?v=WHXEuKQC9OI" },
+    { quote: "Bunny: It’s all too much. (YJHD)", video: "https://www.youtube.com/embed/KiN0dSwBTv4" }
+  ],
+  romantic: [
+    { quote: "Jim: I love you. (The Office)", video: "https://www.youtube.com/embed/LxeINIgEp38" },
+    { quote: "Geet: Main tumse pyaar karti hoon. (Jab We Met)", video: "https://www.youtube.com/embed/OPCMyrZdGzE" },
+    { quote: "Bunny: I can't stop thinking about you. (YJHD)", video: "https://www.youtube.com/embed/KiN0dSwBTv4" },
+    { quote: "Rory: I love you too. (Gilmore Girls)", video: "https://www.youtube.com/embed/urkXoKCKNkk" },
+    { quote: "Phil: You are my everything. (Modern Family)", video: "https://www.youtube.com/embed/0rylq43HnUU" },
+    { quote: "Daphne: I adore you. (Bridgerton)", video: "https://www.youtube.com/embed/XLGlB9YNDUo" }
+  ]
+};
 
-  <footer style="margin: 20px; font-size: 14px; color: #888;">
-    Made with ❤️ by You
-  </footer>
+function showReference(mood) {
+  const moodRefs = references[mood];
+  const randomRef = moodRefs[Math.floor(Math.random() * moodRefs.length)];
+  let content = `<h2>${randomRef.quote}</h2>`;
+  if(randomRef.video) content += `<iframe src="${randomRef.video}" allowfullscreen></iframe>`;
+  document.getElementById("result").innerHTML = content;
+}
+
+function suggestMood() {
+  const moods = ["happy","romantic","stressed","anxious","lonely","sad"];
+  let rand = Math.random();
+  let chosenMood = rand < 0.6 ? moods[Math.floor(Math.random()*4)] : moods[4+Math.floor(Math.random()*2)];
+  showReference(chosenMood);
+}
+</script>
+
+<footer style="margin: 20px; font-size: 14px; color: #888;">
+Made with ❤️ for You
+</footer>
 </body>
 </html>
